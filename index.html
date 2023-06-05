@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebChat</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card text-center">
+          <div class="card-header">
+            <h5 class="card-title">WebChat</h5>
+          </div>
+          <div class="card-body">
+            <button class="btn btn-primary" onclick="showCreateForm()">Criar Sala</button>
+            <button class="btn btn-primary" onclick="showJoinForm()">Entrar em uma Sala</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="createForm" class="container mt-3" style="display: none;">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Criar Sala</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="apelido">Apelido:</label>
+                <input type="text" class="form-control" id="apelidoCreate">
+              </div>
+              <button type="button" class="btn btn-primary" onclick="createRoom()">Criar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="joinForm" class="container mt-3" style="display: none;">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title">Entrar em uma Sala</h5>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="apelido">Apelido:</label>
+                <input type="text" class="form-control" id="apelidoJoin">
+              </div>
+              <div class="form-group">
+                <label for="codigoSala">Código da Sala:</label>
+                <input type="text" class="form-control" id="codigoSala">
+              </div>
+              <button type="button" class="btn btn-primary" onclick="joinRoom()">Entrar</button>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showCreateForm() {
+      document.getElementById('createForm').style.display = 'block';
+      document.getElementById('joinForm').style.display = 'none';
+    }
+
+    function showJoinForm() {
+      document.getElementById('createForm').style.display = 'none';
+      document.getElementById('joinForm').style.display = 'block';
+    }
+    function joinRoom(){
+      var nickname = document.getElementById('apelidoJoin').value
+      var room = document.getElementById('codigoSala').value
+      window.location.href += `chat?room=${room}&nickname=${nickname}`
+    }
+    function createRoom(){
+      var nickname = document.getElementById('apelidoCreate').value
+      var room = Math.random().toString(36).slice(2, 7);
+      window.location.href += `chat?room=${room}&nickname=${nickname}`
+    }
+  </script>
+
+</body>
+</html>
